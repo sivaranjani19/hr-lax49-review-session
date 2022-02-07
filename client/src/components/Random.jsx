@@ -9,25 +9,34 @@ export default class Random extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-
+      currentStudent: {},
+    // index:0,
+    // name: '',
+    // image: ''
     }
+    this.getRandomStudent = this.getRandomStudent.bind(this);
   }
 
   getRandomStudent(){
     // this gives us a random index value
     var ind = Math.floor(Math.random() * this.props.students.length);
     // Todo: Add your logic here to grab one random student
-
+    this.setState({
+      currentStudent: this.props.students[ind],
+      // index: ind,
+      // name: this.props.students[this.state.index].name,
+      // image: this.props.students[this.state.index].imgurl
+    })
   }
 
   render() {
     return (
       <div>
         <div>
-          <img src='https://ca.slack-edge.com/T2SV1LBC6-U0254P5HBLY-b01374551470-512'></img>
-          <h1>Ben</h1>
+          <img src={this.state.currentStudent.imgurl}></img>
+          <h1>{this.state.currentStudent.name}</h1>
         </div>
-        <button>Randomize</button>
+        <button onClick={this.getRandomStudent}>Randomize</button>
       </div>
     )
   }
